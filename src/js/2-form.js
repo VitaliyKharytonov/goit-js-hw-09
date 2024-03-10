@@ -13,12 +13,19 @@ try {
 form.addEventListener('input', event => {
   const email = form.elements.email.value.trim();
   const message = form.elements.message.value.trim();
-
   localStorage.setItem(localStorageKey, JSON.stringify({ email, message }));
 });
 
 form.addEventListener('submit', event => {
   event.preventDefault();
-  localStorage.removeItem(localStorageKey);
-  form.reset();
+  const email = form.elements.email.value.trim();
+  const message = form.elements.message.value.trim();
+
+  if (email === '' || message === '') {
+    alert('All form fields must be filled in');
+  } else {
+    console.log({ email, message });
+    localStorage.removeItem(localStorageKey);
+    form.reset();
+  }
 });
